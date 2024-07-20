@@ -3,10 +3,11 @@ package ArithmeticDC;
 import DataClass.CompoundDataClassBrick;
 import DataClass.DataClassBrick;
 import DataClass.PrimitiveDataClassBrick;
+import DataClass.Result;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AddSubtractTests {
   ArithmeticDCHolder arithmeticDCHolder = new ArithmeticDCHolder();
@@ -23,11 +24,16 @@ public class AddSubtractTests {
     addOp1DCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp1");
     addOp2DCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp2");
     sumDCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("sum");
-    assertTrue(arithmeticDCB.isComplete());
+    assertFalse(arithmeticDCB.isComplete());
   }
 
   @Test
   void putSafe() {
+    //1 = addOp1 can be putSafe if no values are set
+    Result r = addOp1DCB.putSafe(1);
+    assertNull(r.getError());
+    assertEquals(1, addOp1DCB.getVal());
+
 
   }
 
