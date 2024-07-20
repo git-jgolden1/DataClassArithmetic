@@ -9,7 +9,7 @@ public class AddOpDC extends PrimitiveDataClass {
   }
 
   @Override
-  public DataClassBrick makeBrick(String name, CompoundDataClassBrick outer) {
+  public PrimitiveDataClassBrick makeBrick(String name, CompoundDataClassBrick outer) {
     return null;
   }
 

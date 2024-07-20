@@ -9,7 +9,7 @@ public class ArithmeticDC extends CompoundDataClass {
   }
 
   @Override
-  public DataClassBrick makeBrick() {
+  public CompoundDataClassBrick makeBrick() {
     return null;
   }
 
