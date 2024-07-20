@@ -1,9 +1,12 @@
 package ArithmeticDC;
 
 import DataClass.CompoundDataClassBrick;
+import DataClass.DataClassBrick;
 import DataClass.PrimitiveDataClassBrick;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddSubtractTests {
   ArithmeticDCHolder arithmeticDCHolder = new ArithmeticDCHolder();
@@ -15,15 +18,12 @@ public class AddSubtractTests {
 
   @BeforeEach
   void setupDCBs() {
-    ArithmeticDC arithmeticDC = arithmeticDCHolder.arithmeticDC;
-    AddSubtractDC addSubtractDC = arithmeticDCHolder.addSubtractDC;
-    WholeNumberDC wholeNumberDC = arithmeticDCHolder.wholeNumberDC;
-    arithmeticDCB = arithmeticDC.makeBrick();
-    addSubtractDCB = addSubtractDC.makeBrick();
-    addOp1DCB = wholeNumberDC.makeBrick("addOp1", addSubtractDCB);
-    addOp2DCB = wholeNumberDC.makeBrick("addOp2", addSubtractDCB);
-    sumDCB = wholeNumberDC.makeBrick("sum", addSubtractDCB);
-
+    arithmeticDCB = arithmeticDCHolder.arithmeticDC.makeBrick();
+    addSubtractDCB = (CompoundDataClassBrick) arithmeticDCB.getInner("addSubtract");
+    addOp1DCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp1");
+    addOp2DCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp2");
+    sumDCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("sum");
+    assertTrue(arithmeticDCB.isComplete());
   }
 
   @Test
