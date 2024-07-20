@@ -17,13 +17,12 @@ public class AddSubtractTests {
   void setupDCBs() {
     ArithmeticDC arithmeticDC = arithmeticDCHolder.arithmeticDC;
     AddSubtractDC addSubtractDC = arithmeticDCHolder.addSubtractDC;
-    AddOpDC addOpDC = arithmeticDCHolder.addOpDC;
-    SumDC sumDC = arithmeticDCHolder.sumDC;
+    WholeNumberDC wholeNumberDC = arithmeticDCHolder.wholeNumberDC;
     arithmeticDCB = arithmeticDC.makeBrick();
     addSubtractDCB = addSubtractDC.makeBrick();
-    addOp1DCB = addOpDC.makeBrick("addOp1", addSubtractDCB);
-    addOp2DCB = addOpDC.makeBrick("addOp2", addSubtractDCB);
-    sumDCB = sumDC.makeBrick("sum", addSubtractDCB);
+    addOp1DCB = wholeNumberDC.makeBrick("addOp1", addSubtractDCB);
+    addOp2DCB = wholeNumberDC.makeBrick("addOp2", addSubtractDCB);
+    sumDCB = wholeNumberDC.makeBrick("sum", addSubtractDCB);
 
   }
 

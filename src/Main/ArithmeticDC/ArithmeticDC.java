@@ -2,6 +2,8 @@ package ArithmeticDC;
 
 import DataClass.*;
 
+import java.util.HashMap;
+
 public class ArithmeticDC extends CompoundDataClass {
 
   public ArithmeticDC(int minimumRequiredSetValues) {
@@ -10,7 +12,7 @@ public class ArithmeticDC extends CompoundDataClass {
 
   @Override
   public CompoundDataClassBrick makeBrick() {
-    return null;
+    return makeBrick("arithmetic", null);
   }
 
   @Override
@@ -24,8 +26,17 @@ public class ArithmeticDC extends CompoundDataClass {
   }
 
   @Override
-  public DataClassBrick makeBrick(String name, CompoundDataClassBrick outer) {
-    return null;
+  public CompoundDataClassBrick makeBrick(String name, CompoundDataClassBrick outer) {
+    HashMap<String, DataClassBrick> arithmeticDCBInners = new HashMap<>();
+    CompoundDataClassBrick arithmeticDCB = CompoundDataClassBrick.make(name, outer, this, arithmeticDCBInners);
+
+    AddSubtractDC addSubtractDC = (AddSubtractDC) getInner("addSubtract");
+    CompoundDataClassBrick addSubtractDCB = addSubtractDC.makeBrick("addSubtract", arithmeticDCB);
+
+    arithmeticDCBInners.put("addSubtract", addSubtractDCB);
+
+    return arithmeticDCB.initInners(arithmeticDCBInners);
+
   }
 
 }
