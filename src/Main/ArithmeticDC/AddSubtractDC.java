@@ -30,11 +30,19 @@ public class AddSubtractDC extends CompoundDataClass {
       PrimitiveDataClassBrick addOp1 = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp1");
       PrimitiveDataClassBrick addOp2 = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp2");
       PrimitiveDataClassBrick sum = (PrimitiveDataClassBrick) addSubtractDCB.getInner("sum");
-      ccr = addOps1And2ConflictWithSum(addOp1, addOp2, sum);
+      ccr = addOpsConflictWithSum((int)addOp1.getVal(), (int)addOp2.getVal(), (int)sum.getVal());
     } else {
       ccr = ConflictsCheckResult.maybe;
     }
     return ccr;
+  }
+
+  private ConflictsCheckResult addOpsConflictWithSum(int addOp1, int addOp2, int sum) {
+    if(addOp1 + addOp2 == sum) {
+      return ConflictsCheckResult.no;
+    } else {
+      return ConflictsCheckResult.yes;
+    }
   }
 
   @Override
