@@ -22,7 +22,7 @@ public class ArithmeticDC extends CompoundDataClass {
 
   @Override
   public ConflictsCheckResult conflictsCheck(CompoundDataClassBrick brick, String targetName, Object targetVal) {
-    return null;
+    return ConflictsCheckResult.no;
   }
 
   @Override

@@ -23,14 +23,17 @@ public class AddSubtractDC extends CompoundDataClass {
   @Override
   public ConflictsCheckResult conflictsCheck(CompoundDataClassBrick addSubtractDCB, String targetName, Object targetVal) {
     ConflictsCheckResult ccr;
-    boolean addOp1IsOrWillBeSet = targetName.equals("addOp1") || addSubtractDCB.getInner("addOp1").isComplete();
-    boolean addOp2IsOrWillBeSet = targetName.equals("addOp2") || addSubtractDCB.getInner("addOp2").isComplete();
-    boolean sumIsOrWillBeSet = targetName.equals("sum") || addSubtractDCB.getInner("sum").isComplete();
+    PrimitiveDataClassBrick addOp1DCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp1");
+    PrimitiveDataClassBrick addOp2DCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp2");
+    PrimitiveDataClassBrick sumDCB = (PrimitiveDataClassBrick) addSubtractDCB.getInner("sum");
+    boolean addOp1IsOrWillBeSet = targetName.equals("addOp1") || addOp1DCB.isComplete();
+    boolean addOp2IsOrWillBeSet = targetName.equals("addOp2") || addOp2DCB.isComplete();
+    boolean sumIsOrWillBeSet = targetName.equals("sum") || sumDCB.isComplete();
     if(addOp1IsOrWillBeSet && addOp2IsOrWillBeSet && sumIsOrWillBeSet) {
-      PrimitiveDataClassBrick addOp1 = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp1");
-      PrimitiveDataClassBrick addOp2 = (PrimitiveDataClassBrick) addSubtractDCB.getInner("addOp2");
-      PrimitiveDataClassBrick sum = (PrimitiveDataClassBrick) addSubtractDCB.getInner("sum");
-      ccr = addOpsConflictWithSum((int)addOp1.getVal(), (int)addOp2.getVal(), (int)sum.getVal());
+      int op1 = targetName.equals("addOp1") ? (int)targetVal : (int)addOp1DCB.getVal();
+      int op2 = targetName.equals("addOp2") ? (int)targetVal : (int)addOp2DCB.getVal();
+      int sum = targetName.equals("sum") ? (int)targetVal : (int)sumDCB.getVal();
+      ccr = addOpsConflictWithSum(op1, op2, sum);
     } else {
       ccr = ConflictsCheckResult.maybe;
     }
