@@ -34,6 +34,12 @@ public class AddSubtractTests {
     assertNull(r.getError());
     assertEquals(1, addOp1DCB.getVal());
 
+    //2 = addOp2 can also be putSafe if no sum is set
+    r = addOp2DCB.putSafe(2);
+    assertNull(r.getError());
+    assertEquals(2, addOp2DCB.getVal());
+
+    //3 = sum can be putSafe if no conflicts exist with addOps
 
   }
 
